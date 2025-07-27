@@ -1,16 +1,9 @@
-
-import ShoppingList from '../ShoppingList';
-import './index.css';
-
-import Profile from './Profile';
-
+import React from 'react'
 
 const App = () => {
   return (
     <div>
-      {/* <Counter></Counter> */}
-       <Profile></Profile>
-       <ShoppingList></ShoppingList> 
+      
     </div>
   )
 }
