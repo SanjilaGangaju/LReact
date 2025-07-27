@@ -1,24 +1,55 @@
-import React, { use, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import QuizzesDisplay from './QuizzesDisplay'
 import quizQuestions from './components/questions'
 const App = () => {
   const[score, setScore]=useState(0)
   const[currentQuestion, setCurrentQuestion] = useState(0)
   const [showResult, setShowResult] = useState(0)
-  const [message, setMessage] = useState("Answering.........");
+  const [message, setMessage] = useState();
   const [correct, setCorrect] = useState("wrong");
-
+  const [time, setTime] = useState(10);
+  console.log(time);
+  
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+      
+      setTime(prevTime=>{
+        if(prevTime==1){
+          clearInterval(interval);
+          
+          setMessage("Time's up");
+        
+          
+        
+        }
+        
+          
+        return prevTime-1;    
+      })
+  
+     
+     
+    }, 1000);
+    return ()=> clearInterval(interval);
+    
+  },[currentQuestion])
   const handleOption=(optionValue)=>{
-   
+    setTime(0)
     if (optionValue===quizQuestions[currentQuestion].answer){
-       setMessage("Correct")
-       setCorrect("correct");
-       
+        
+        setMessage("Correct")
+         setCorrect("correct");
+
+         
        setScore(score+1);
+       
+      
       
     }
     else{
-      setMessage("wrong")
+      
+      setMessage("wrong!!!!!!")
+      setTime(time);
     }
   }
   const handleNextQuestion=()=>{
@@ -26,12 +57,14 @@ const App = () => {
     setCorrect("wrong");
     setCurrentQuestion(currentQuestion+1)
     setMessage("Answering........")
+      setTime(10)
     
     
 
    }
    const handlePrevQuestion=()=>{
     setCurrentQuestion(currentQuestion-1)
+      setTime(10)
 
    }
    const handleRestart=()=>{
@@ -39,11 +72,12 @@ const App = () => {
     setCurrentQuestion(0)
     setCorrect("wrong")
     setMessage("Answering.......")
+    setTime(10)
     
    }
   return (
     <div>
-      <QuizzesDisplay questions={quizQuestions} score={score}message={message} correct={correct}currentQuestion={currentQuestion} handleOption={handleOption} handleNextQuestion={handleNextQuestion} handleRestart={handleRestart}handlePrevQuestion={handlePrevQuestion}></QuizzesDisplay>
+      <QuizzesDisplay questions={quizQuestions} score={score}message={message} time={time} correct={correct}currentQuestion={currentQuestion} handleOption={handleOption} handleNextQuestion={handleNextQuestion} handleRestart={handleRestart}handlePrevQuestion={handlePrevQuestion}></QuizzesDisplay>
     </div>
   )
 }
