@@ -1,4 +1,5 @@
 
+import ShoppingList from '../ShoppingList';
 import './index.css';
 
 import Profile from './Profile';
@@ -9,7 +10,7 @@ const App = () => {
     <div>
       {/* <Counter></Counter> */}
        <Profile></Profile>
-       {/* <ShoppingList></ShoppingList> */}
+       <ShoppingList></ShoppingList> 
     </div>
   )
 }
