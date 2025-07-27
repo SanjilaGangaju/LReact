@@ -37,6 +37,7 @@ const App = () => {
    const handleRestart=()=>{
     setScore(0);
     setCurrentQuestion(0)
+    setCorrect("wrong")
     setMessage("Answering.......")
     
    }
