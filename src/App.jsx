@@ -1,6 +1,7 @@
 import React, { use, useEffect, useState } from 'react'
 import QuizzesDisplay from './QuizzesDisplay'
 import quizQuestions from './components/questions'
+import './components/quizz.css'
 const App = () => {
   const[score, setScore]=useState(0)
   const[currentQuestion, setCurrentQuestion] = useState(0)
@@ -8,6 +9,7 @@ const App = () => {
   const [message, setMessage] = useState();
   const [correct, setCorrect] = useState("wrong");
   const [time, setTime] = useState(10);
+  const[clicked, setClicked] = useState(false);
   console.log(time);
   
   useEffect(()=>{
@@ -36,7 +38,7 @@ const App = () => {
   const handleOption=(optionValue)=>{
     setTime(0)
     if (optionValue===quizQuestions[currentQuestion].answer){
-        
+      
         setMessage("Correct")
          setCorrect("correct");
 
@@ -76,8 +78,8 @@ const App = () => {
     
    }
   return (
-    <div>
-      <QuizzesDisplay questions={quizQuestions} score={score}message={message} time={time} correct={correct}currentQuestion={currentQuestion} handleOption={handleOption} handleNextQuestion={handleNextQuestion} handleRestart={handleRestart}handlePrevQuestion={handlePrevQuestion}></QuizzesDisplay>
+    <div className="quiz-container">
+      <QuizzesDisplay questions={quizQuestions} clicked ={clicked} score={score}message={message} time={time} correct={correct}currentQuestion={currentQuestion} handleOption={handleOption} handleNextQuestion={handleNextQuestion} handleRestart={handleRestart}handlePrevQuestion={handlePrevQuestion}></QuizzesDisplay>
     </div>
   )
 }

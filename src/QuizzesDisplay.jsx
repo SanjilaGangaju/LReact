@@ -1,11 +1,18 @@
 import React from 'react'
+import './components/quizz.css'
+const QuizzesDisplay = ({ questions ,message,time, currentQuestion, clicked, handleOption, handleNextQuestion, handlePrevQuestion, score, correct, handleRestart}) => {
 
-const QuizzesDisplay = ({ questions ,message,time, currentQuestion, handleOption, handleNextQuestion, handlePrevQuestion, score, correct, handleRestart}) => {
- 
   return (
-    <div>
-      <p>{questions[currentQuestion].question}</p>
-      {questions[currentQuestion].options.map(option=><button key={option} disabled={correct==="correct" || time==0? true : false} onClick={()=>handleOption(option)}>{option}</button>)}<br></br>
+    <div className= "quiz-wrapper">
+      <h1>Quizzlers</h1>
+      <p className='questions-text'>{questions[currentQuestion].question}</p>
+      <div className="options-wrapper">
+        
+        {questions[currentQuestion].options.map(option=>
+        
+        <button className='options-btn' key={option} disabled={correct==="correct" || time==0? true : false} onClick={()=>handleOption(option)}>{option}</button>)}<br></br>
+
+      </div>
       <p>{time<=0? message: `${time} sec remaining`}</p>
       <button onClick={()=>handleNextQuestion()} 
         disabled={currentQuestion==questions.length-1? true: false}>Next</button><br></br><br></br>
